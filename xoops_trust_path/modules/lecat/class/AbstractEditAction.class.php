@@ -232,5 +232,3 @@ abstract class Lecat_AbstractEditAction extends Lecat_AbstractAction
 		$this->mRoot->mController->executeForward($this->_getNextUri($this->_mDataname));
 	}
 }
-
-?>

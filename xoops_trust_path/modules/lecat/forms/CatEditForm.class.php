@@ -20,9 +20,9 @@ class Lecat_CatEditForm extends XCube_ActionForm
 {
     /**
      * getTokenName
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  string
     **/
     public function getTokenName()
@@ -32,9 +32,9 @@ class Lecat_CatEditForm extends XCube_ActionForm
 
     /**
      * prepare
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  void
     **/
     public function prepare()
@@ -49,24 +49,24 @@ class Lecat_CatEditForm extends XCube_ActionForm
         $this->mFormProperties['description'] =new XCube_TextProperty('description');
         $this->mFormProperties['weight'] =new XCube_IntProperty('weight');
         $this->mFormProperties['options'] =new XCube_TextProperty('options');
-    
+
         //
         // Set field properties
         //
         $this->mFieldProperties['cat_id'] =new XCube_FieldProperty($this);
         $this->mFieldProperties['cat_id']->setDependsByArray(array('required'));
         $this->mFieldProperties['cat_id']->addMessage('required', _MD_LECAT_ERROR_REQUIRED, _MD_LECAT_LANG_CAT_ID);
-    
+
         $this->mFieldProperties['title'] =new XCube_FieldProperty($this);
         $this->mFieldProperties['title']->setDependsByArray(array('required','maxlength'));
-        $this->mFieldProperties['title']->addMessage('required', _MD_LECAT_ERROR_REQUIRED, _MD_LECAT_LANG_TITLE, '255');
-        $this->mFieldProperties['title']->addMessage('maxlength', _MD_LECAT_ERROR_MAXLENGTH, _MD_LECAT_LANG_TITLE, '255');
-        $this->mFieldProperties['title']->addVar('maxlength', '255');
-    
+        $this->mFieldProperties['title']->addMessage('required', _MD_LECAT_ERROR_REQUIRED, _MD_LECAT_LANG_TITLE, '191');
+        $this->mFieldProperties['title']->addMessage('maxlength', _MD_LECAT_ERROR_MAXLENGTH, _MD_LECAT_LANG_TITLE, '191');
+        $this->mFieldProperties['title']->addVar('maxlength', '191');
+
         $this->mFieldProperties['p_id'] =new XCube_FieldProperty($this);
         $this->mFieldProperties['p_id']->setDependsByArray(array('required'));
         $this->mFieldProperties['p_id']->addMessage('required', _MD_LECAT_ERROR_REQUIRED, _MD_LECAT_LANG_P_ID);
-    
+
         $this->mFieldProperties['weight'] =new XCube_FieldProperty($this);
         $this->mFieldProperties['weight']->setDependsByArray(array('required'));
         $this->mFieldProperties['weight']->addMessage('required', _MD_LECAT_ERROR_REQUIRED, _MD_LECAT_LANG_WEIGHT);
@@ -74,9 +74,9 @@ class Lecat_CatEditForm extends XCube_ActionForm
 
     /**
      * load
-     * 
+     *
      * @param   XoopsSimpleObject  &$obj
-     * 
+     *
      * @return  void
     **/
     public function load(/*** XoopsSimpleObject ***/ &$obj)
@@ -92,9 +92,9 @@ class Lecat_CatEditForm extends XCube_ActionForm
 
     /**
      * update
-     * 
+     *
      * @param   XoopsSimpleObject  &$obj
-     * 
+     *
      * @return  void
     **/
     public function update(/*** XoopsSimpleObject ***/ &$obj)
@@ -108,5 +108,3 @@ class Lecat_CatEditForm extends XCube_ActionForm
         $obj->set('options', $this->get('options'));
     }
 }
-
-?>

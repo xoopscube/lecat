@@ -133,5 +133,3 @@ class Lecat_PermitEditAction extends Lecat_AbstractEditAction
 	}
 
 }
-
-?>

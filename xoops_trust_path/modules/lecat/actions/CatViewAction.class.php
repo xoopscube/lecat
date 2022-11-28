@@ -124,5 +124,3 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
         $render->setAttribute('xoops_breadcrumbs', $breadcrumbs);
     }
 }
-
-?>
