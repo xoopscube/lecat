@@ -106,5 +106,3 @@ abstract class Lecat_AbstractDeleteAction extends Lecat_AbstractEditAction
 		$this->mRoot->mController->executeForward($this->_getNextUri($this->_mDataname));
 	}
 }
-
-?>

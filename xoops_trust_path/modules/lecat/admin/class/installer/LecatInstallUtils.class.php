@@ -335,12 +335,8 @@ class Lecat_InstallUtils
 	**/
 	public static function &createBlockByInfo(/*** XoopsModule ***/ &$module,/*** string[] ***/ $block)
 	{
-		$visible = isset($block['visible']) ?
-			$block['visible'] :
-			(isset($block['visible_any']) ? $block['visible_any'] : 0);
-		$filename = isset($block['template']) ?
-			Lecat_InstallUtils::replaceDirname($block['template'],$module->get('dirname')) :
-			null;
+		$visible = isset($block['visible']) ? $block['visible'] : (isset($block['visible_any']) ? $block['visible_any'] : 0);
+		$filename = isset($block['template']) ? Lecat_InstallUtils::replaceDirname($block['template'],$module->get('dirname')) : null;
 	
 		$blockHandler =& Lecat_Utils::getXoopsHandler('block');
 		$blockObj =& $blockHandler->create();
@@ -678,7 +674,8 @@ class Lecat_InstallUtils
 	**/
 	public static function updateBlockByInfo(/*** Legacy_BlockInformation ***/ &$info,/*** XoopsModule ***/ &$module,/*** Legacy_ModuleInstallLog ***/ &$log)
 	{
-		$blockHandler =& Legacy_Utils::getModuleHandler('newblocks','legacy');
+        // TODO fix reference
+		$blockHandler = Legacy_Utils::getModuleHandler('newblocks','legacy');
 		$cri =new CriteriaCompo();
 		$cri->add(new Criteria('dirname',$module->get('dirname')));
 		$cri->add(new Criteria('func_num',$info->mFuncNum));

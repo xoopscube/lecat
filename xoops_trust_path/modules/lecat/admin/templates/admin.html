@@ -1,5 +1,22 @@
-<ul class="adminMenu">
-<{foreach item=menu from=$adminMenu}>
-<li><a href="<{$menu.link}>"><{$menu.title}></a></li>
-<{/foreach}>
-</ul>
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<div class="adminnavi" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php">Dashboard</a>
+    &raquo;&raquo; <span class="adminnaviTitle" aria-current="page"><a href="./index.php?action=Index"><{$legacy_module}></a></span>
+</div>
+
+<nav class="adminavi">
+    <{foreach item=menu from=$adminMenu}>
+    <a href="<{$menu.link}>" class="adminavi-item"><{$menu.title}></a>
+    <{/foreach}>
+</nav>
+
+
+<div class="adminPage">
+    <div class="tips">
+        <p class="description">
+            <{$smarty.const._MI_LECAT_LANG_LECAT}><br>
+            <{$smarty.const._MI_LECAT_DESC_LECAT}>
+        </p>
+    </div>
+</div>

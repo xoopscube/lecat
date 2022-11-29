@@ -1,10 +1,32 @@
-<div id="lecat">
-<{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
-<h1><{$smarty.const._MD_LECAT_LANG_EDIT_ACTOR}></h1>
+<nav aria-label="breadcrumb">
+    <ul>
+        <li>
+            <a href="<{$xoops_url}>/">
+                <img class="svg home" src="<{$xoops_url}>/images/icons/home.svg" width="1em" height="1em" alt="home">
+            </a>
+        </li>
+        <li>
+            <a href="<{xoops_cooluri dirname=$dirname}>">
+                <img class="svg folder" src="<{$xoops_url}>/images/icons/folder.svg" width="1em" height="1em" alt="category"> <{$smarty.const._MD_LECAT_LANG_CAT}>
+            </a>
+        </li>
+    </ul>
+</nav>
+
 <form action="<{xoops_cooluri dirname=$dirname dataname=actor action=edit}>" method="post">
+
+<article id="lecat">
+
+     <header>
+         <h2><{$smarty.const._MD_LECAT_LANG_EDIT_ACTOR}></h2>
+         <p><{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}></p>
+     </header>
+
   <{$smarty.const._MD_LECAT_DESC_PERMISSION_TYPE}>
-  <table id="permitOptions" class="outer" summary="">
+  <table id="permitOptions">
     <tbody>
       <tr>
         <th><{$smarty.const._MD_LECAT_LANG_AUTH_KEY}></th>
@@ -16,23 +38,21 @@
       <tr>
         <td><{xoops_input type=text name=key[$it] value=$actors.key[$it]}></td>
         <td><{xoops_input type=text name=title[$it] value=$actors.title[$it]}></td>
-        <td><input type="checkbox" name="default[<{$it}>]" value="1" id="legacy_xoopsform_actors_default[<{$it}>]" <{if $actors.default[$it]==1}>checked="checked"<{/if}> /></td>
+        <td>
+            <input type="checkbox" name="default[<{$it}>]" value="1" id="legacy_xoopsform_actors_default[<{$it}>]" <{if $actors.default[$it]==1}>checked="checked"<{/if}>>
+        </td>
       </tr>
       <{/foreach}>
     </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="3">
-          <input type="button" value="<{$smarty.const._MD_LECAT_LANG_ADD_A_NEW_PERMISSION_TYPE}>" onClick="addActorKeyForm()">
-        </td>
-      </tr>
-      <tr>
-        <td class="foot" colspan="3">
-          <{xoops_token form=$actionForm}>
-          <input type="submit" value="<{$smarty.const._SUBMIT}>" />
-        </td>
-      </tr>
-    </tfoot>
   </table>
+
+    <footer class="action-control">
+        <input type="button" class="outline" value="<{$smarty.const._MD_LECAT_LANG_ADD_A_NEW_PERMISSION_TYPE}>" onClick="addActorKeyForm()">
+        <{xoops_token form=$actionForm}>
+        <input class="primary" type="submit" value="<{$smarty.const._SUBMIT}>">
+    </footer>
+
+</article>
+
 </form>
-</div>
+

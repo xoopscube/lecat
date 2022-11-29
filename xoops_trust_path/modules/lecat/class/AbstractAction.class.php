@@ -32,9 +32,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * __construct
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  void
     **/
     public function __construct()
@@ -46,9 +46,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * _getPageTitle
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  string
     **/
     protected function _getPagetitle()
@@ -58,9 +58,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * _getActionTitle
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  string
     **/
     protected function _getActionTitle()
@@ -70,9 +70,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * getPageTitle
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  string
     **/
     public function getPagetitle()
@@ -82,9 +82,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * _getStylesheet
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  String
     **/
     protected function _getStylesheet()
@@ -94,9 +94,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * setHeaderScript
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  void
     **/
     public function setHeaderScript()
@@ -114,9 +114,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * prepare
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  bool
     **/
     public function prepare()
@@ -126,9 +126,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * hasPermission
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  bool
     **/
     public function hasPermission()
@@ -138,9 +138,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * getDefaultView
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  Enum
     **/
     public function getDefaultView()
@@ -150,9 +150,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * execute
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  Enum
     **/
     public function execute()
@@ -162,9 +162,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * executeViewSuccess
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewSuccess(/*** XCube_RenderTarget ***/ &$render)
@@ -173,9 +173,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * executeViewError
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewError(/*** XCube_RenderTarget ***/ &$render)
@@ -184,9 +184,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * executeViewIndex
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewIndex(/*** XCube_RenderTarget ***/ &$render)
@@ -195,9 +195,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * executeViewInput
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewInput(/*** XCube_RenderTarget ***/ &$render)
@@ -206,9 +206,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * executeViewPreview
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewPreview(/*** XCube_RenderTarget ***/ &$render)
@@ -217,9 +217,9 @@ abstract class Lecat_AbstractAction
 
     /**
      * executeViewCancel
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewCancel(/*** XCube_RenderTarget ***/ &$render)
@@ -228,9 +228,9 @@ abstract class Lecat_AbstractAction
 
 	/**
 	 * _getNextUri
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	string
 	**/
 	protected function _getNextUri($tableName, $actionName=null)
@@ -245,5 +245,3 @@ abstract class Lecat_AbstractAction
 	}
 
 }
-
-?>

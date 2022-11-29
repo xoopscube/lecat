@@ -162,7 +162,4 @@ class Lecat_CatEditAction extends Lecat_AbstractEditAction
         $render->setAttribute('imageNameList', Lecat_Utils::getImageNameList($this->mAsset->mDirname));
     }
 
-
 }
-
-?>

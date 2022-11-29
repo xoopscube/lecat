@@ -282,5 +282,3 @@ class Lecat_AssetManager
         return LECAT_TRUST_PATH . ($isAdmin ? '/admin/' : '/');
     }
 }
-
-?>

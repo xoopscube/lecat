@@ -1,103 +1,180 @@
-<div id="lecat">
-<{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
-  <div class="catDetail">
-    <h1><{$smarty.const._MD_LECAT_LANG_TITLE}>: <{$object->getShow('title')}>
-      <a href="<{xoops_cooluri dirname=$dirname dataname=cat data_id=$object->getShow('cat_id') action=edit}>"><img src="<{$xoops_url}>/images/icons/edit.gif" alt="<{$smarty.const._EDIT}>" /></a>
-      <a href="<{xoops_cooluri dirname=$dirname dataname=cat data_id=$object->getShow('cat_id') action=delete}>"><img src="<{$xoops_url}>/images/icons/delete.gif" alt="<{$smarty.const._DELETE}>" /></a>
-    </h1>
-    <div class="description">
-      <{$object->getShow('description')}>
+<nav aria-label="breadcrumb">
+    <ul>
+        <li>
+            <a href="<{$xoops_url}>/">
+                <img class="svg home" src="<{$xoops_url}>/images/icons/home.svg" width="1em" height="1em" alt="home">
+            </a>
+        </li>
+        <li>
+            <a href="<{xoops_cooluri dirname=$dirname}>">
+                <img class="svg folder" src="<{$xoops_url}>/images/icons/folder.svg" width="1em" height="1em" alt="category"> <{$smarty.const._MD_LECAT_LANG_CAT}>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<article id="lecat">
+
+
+    <header class="catDetail">
+
+    <h3><{$smarty.const._MD_LECAT_LANG_TITLE}>: <{$object->getShow('title')}>
+
+        <{if $xoops_isadmin}>
+        <span>
+            <a href="<{xoops_cooluri dirname=$dirname dataname=cat data_id=$object->getShow('cat_id') action=delete}>" data-tooltip="<{$smarty.const._DELETE}>">
+                <img class="svg delete" src="<{$xoops_url}>/images/icons/delete.svg" alt="delete"></a>
+            <a href="<{xoops_cooluri dirname=$dirname dataname=cat data_id=$object->getShow('cat_id') action=edit}>" data-tooltip="<{$smarty.const._EDIT}>">
+                <img class="svg edit" src="<{$xoops_url}>/images/icons/edit.svg" alt="edit"></a>
+        </span>
+        <{/if}>
+    </h3>
+
+    <p><{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}></p>
+
+    </header>
+
+    <div class="grid-2">
+        <h5><{$object->getShow('title')}></h5>
+        <span class="description">
+            <input type="text" value="<{$object->getShow('description')}>" readonly>
+        </span>
     </div>
-    <dl class="view">
-      <dt><{$smarty.const._MD_LECAT_LANG_PARENT}>:</dt>
-      <dd><{if $object->mPcat}><a href="<{xoops_cooluri dirname=$dirname dataname=cat data_id=$object->getShow('p_id')}>"><{$object->mPcat->getShow('title')}></a><{else}><{$smarty.const._MD_LECAT_LANG_TOP_CAT}><{/if}></dd>
-      <{if $xoops_isadmin}>
-      <dt><{$smarty.const._MD_LECAT_LANG_WEIGHT}>:</dt>
-      <dd><{$object->getShow('weight')}></dd>
-      <dt><{$smarty.const._MD_LECAT_LANG_MODULES_CONFINEMENT}></dt>
-      <{foreach item=module from=$modulesArr}>
-      <dd><{$module}></dd>
-      <{/foreach}>
-      <{/if}>
-    </dl>
-  </div>
-  <hr class="clear" />
-  <{if $xoops_isadmin}>
-  <div>
-  <h2><{$smarty.const._MD_LECAT_LANG_PERMISSIONS}></h2>
-  <p><{$smarty.const._MD_LECAT_TIPS_PERMISSIONS}></p>
-  <form action="<{xoops_cooluri dirname=$dirname dataname=permit action=edit}>" method="post">
+
+    <div class="grid-2">
+        <h5><{$smarty.const._MD_LECAT_LANG_PARENT}></h5>
+
+        <{if $object->mPcat}>
+        <a href="<{xoops_cooluri dirname=$dirname dataname=cat data_id=$object->getShow('p_id')}>">
+          <{$object->mPcat->getShow('title')}>
+        </a>
+        <{else}>
+        <input type="text" value="<{$smarty.const._MD_LECAT_LANG_TOP_CAT}>" readonly>
+        <{/if}>
+    </div>
+
+    <{if $xoops_isadmin}>
+    <div class="grid-2">
+        <h5><{$smarty.const._MD_LECAT_LANG_WEIGHT}></h5>
+        <input type="text" value="<{$object->getShow('weight')}>" readonly>
+    </div>
+    <div class="grid-2">
+        <h5><{$smarty.const._MD_LECAT_LANG_MODULES_CONFINEMENT}></h5>
+        <div>
+        <{foreach item=module from=$modulesArr}>
+        <input type="text" value="<{$module}>" readonly>
+        <{/foreach}>
+        </div>
+    </div>
+    <{/if}>
+
+<hr>
+
+<{if $xoops_isadmin}>
+    <div class="headings">
+        <h3><{$smarty.const._MD_LECAT_LANG_PERMISSIONS}></h3>
+        <h5><{$smarty.const._MD_LECAT_TIPS_PERMISSIONS}></h5>
+    </div>
+
+    <form action="<{xoops_cooluri dirname=$dirname dataname=permit action=edit}>" method="post">
     <{xoops_token form=$actionFormPermit}>
     <{xoops_input type=hidden name=permit_id value=$actionFormPermit->get('permit_id')}>
     <{xoops_input type=hidden name=cat_id value=$actionFormPermit->get('cat_id')}>
     <{assign var=targetCat value=$permitObj->getTargetCat()}>
+
     <{if $targetCat=='cur'}>
     <table class="outer curCatPermit">
     <{elseif $targetCat=='anc'}>
     <table class="outer ancCatPermit">
     <{else}>
     <table class="outer ngCatPermit">
-    <{/if}>
-      <tr>
-        <th style="width:150px;">Group</th>
-        <{foreach item=act from=$permitObj->mActionArr.name}>
-          <th><{$act}></th>
-        <{/foreach}>
-      </tr>
-      <{foreach item=group key=gKey from=$permitObj->mGroupArr.groupid}>
-        <tr>
-        <{if $targetCat=='cur'}>
-          <{xoops_input type=hidden name=permit_ids[$group] value=$permitObj->mPermit.permit_id[$gKey].$targetCat}>
         <{/if}>
-          <th><{$permitObj->mGroupArr.name[$gKey]}></th>
-          <{foreach item=permitKey key=oKey from=$permitObj->mActionArr.key}>
-            <{if $targetCat}>
-              <td>
-              <input type="checkbox" name="permission[<{$group}>][<{$permitKey}>]" value="1"<{if $permitObj->checkPermitGroup($gKey, $oKey)==1}> checked="checked"<{/if}>>
-              </td>
-            <{else}>
-              <td>NG</td>
-            <{/if}>
-          <{/foreach}>
+        <tr>
+            <th style="width:150px;">Group</th>
+            <{foreach item=act from=$permitObj->mActionArr.name}>
+            <th><{$act}></th>
+            <{/foreach}>
         </tr>
-      <{/foreach}>
+        <{foreach item=group key=gKey from=$permitObj->mGroupArr.groupid}>
+        <tr>
+            <{if $targetCat=='cur'}>
+            <{xoops_input type=hidden name=permit_ids[$group] value=$permitObj->mPermit.permit_id[$gKey].$targetCat}>
+            <{/if}>
+            <th><{$permitObj->mGroupArr.name[$gKey]}></th>
+            <{foreach item=permitKey key=oKey from=$permitObj->mActionArr.key}>
+            <{if $targetCat}>
+            <td>
+                <input type="checkbox" name="permission[<{$group}>][<{$permitKey}>]" value="1"<{if $permitObj->checkPermitGroup($gKey, $oKey)==1}> checked="checked"<{/if}>>
+            </td>
+            <{else}>
+            <td>NG</td>
+            <{/if}>
+            <{/foreach}>
+        </tr>
+        <{/foreach}>
     </table>
-    <input type="submit" class="formButton" value="<{$smarty.const._SUBMIT}>"/>
-  </form>
-  <{assign var=catId value=$object->getShow('cat_id')}>
-  <{if $permitObj->getTargetCat()=='cur'}>
-    <hr />
-    <form action="<{xoops_cooluri dirname=$dirname dataname=permit action=edit query="cat_id=`$catId`"}>" method="post">
-    <p>
-    <input type="submit" class="formButton" value="<{$smarty.const._MD_LECAT_LANG_DELEET_ALL_PERMIT}>"/>
-    <{xoops_input type=hidden name=cat_id value=$object->getShow('cat_id')}>
-    <{xoops_input type=hidden name=action value="PermitEdit"}>
-    </p>
+
+        <label>
+            <input type="submit" class="primary" value="<{$smarty.const._SUBMIT}>">
+        </label>
+
     </form>
-  <{/if}>
-  </div>
-  <hr class="clear" />
-  <{/if}>
 
-  <!-- Cat Client Data -->
-  <div id="clientList">
-  <{foreach item=client from=$clients.data key=k}>
-  <div class="client">
-    <h2><{$clients.title[$k]}>
-      <a href="<{xoops_cooluri dirname=$clients.dirname[$k] dataname=$clients.dataname[$k] action=list query="category_id=`$catId`"}>"><img src="<{$xoops_url}>/modules/<{$dirname}>/images/list.gif" alt="<{$smarty.const._LIST}>" /></a>
-      <{if $clients.isEditor[$k]==true}><a href="<{xoops_cooluri dirname=$clients.dirname[$k] dataname=$clients.dataname[$k] action=edit query="category_id=`$catId`"}>"><img src="<{$xoops_url}>/modules/<{$dirname}>/images/add.gif" alt="<{$smarty.const._EDIT}>" /></a><{/if}>
-    </h2>
-    <{foreach item=item from=$clients.data[$k]}>
-    <{include file="`$clients.template_name[$k]`" data=$item}>
-    <{/foreach}>
-  </div>
-  <{/foreach}>
+    <{assign var=catId value=$object->getShow('cat_id')}>
+    <{if $permitObj->getTargetCat()=='cur'}>
+    <hr>
+
+    <form action="<{xoops_cooluri dirname=$dirname dataname=permit action=edit query='cat_id=`$catId`'}>" method="post">
+        <p>
+            <input type="submit" class="formButton" value="<{$smarty.const._MD_LECAT_LANG_DELETE_ALL_PERMIT}>"/>
+            <{xoops_input type=hidden name=cat_id value=$object->getShow('cat_id')}>
+            <{xoops_input type=hidden name=action value="PermitEdit"}>
+        </p>
+    </form>
+    <{/if}>
+</article>
+
+<{/if}>
+
+<!-- Cat Client Data -->
+<article>
+    <div id="clientList">
+        <{foreach item=client from=$clients.data key=k}>
+        <div class="client">
+            <h2><{$clients.title[$k]}>
+                <a href="<{xoops_cooluri dirname=$clients.dirname[$k] dataname=$clients.dataname[$k] action=list query='category_id=`$catId`'}>"
+                   data-tooltip="<{$smarty.const._LIST}>">
+                    <img class="svg list" src="<{$xoops_url}>/images/icons/list-tree.svg" alt="list">
+                    <{$smarty.const._LIST}>
+                </a>
+                <{if $clients.isEditor[$k]==true}>
+                <a href="<{xoops_cooluri dirname=$clients.dirname[$k] dataname=$clients.dataname[$k] action=edit query='category_id=`$catId`'}>"
+                   data-tooltip="<{$smarty.const._EDIT}>">
+                    <img class="svg edit" src="<{$xoops_url}>/images/icons/edit.svg" alt="edit">
+                </a>
+                <{/if}>
+            </h2>
+            <{foreach item=item from=$clients.data[$k]}>
+            <{include file="`$clients.template_name[$k]`" data=$item}>
+            <{/foreach}>
+        </div>
+        <{/foreach}>
+    </div>
+
+    <div class="catTree">
+    <h3><{$smarty.const._MD_LECAT_LANG_CAT}></h3>
+
+        <{legacy_tree tree=$childrenTree dirname=$dirname}>
+
+        <{if $xoops_isadmin}>
+        <p><a role="button" class="outline" href="<{xoops_cooluri dirname=$dirname dataname=cat action=edit}>">
+          <img class="svg cat-plus" src="<{$xoops_url}>/images/icons/folder-plus.svg" alt="cat-add">
+          <{$smarty.const._MD_LECAT_LANG_ADD_A_NEW_CAT}></a></p>
+        <{/if}>
   </div>
 
-  <div class="catTree">
-    <h2><{$smarty.const._MD_LECAT_LANG_CAT}></h2>
-    <a href="<{xoops_cooluri dirname=$dirname dataname=cat action=edit}>"><{$smarty.const._MD_LECAT_LANG_ADD_A_NEW_CAT}></a>
-    <{legacy_tree tree=$childrenTree dirname=$dirname}>
-  </div>
-</div>
+</article>

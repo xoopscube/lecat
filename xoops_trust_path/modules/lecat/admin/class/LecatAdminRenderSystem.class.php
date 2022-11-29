@@ -146,7 +146,9 @@ class Lecat_AdminRenderSystem extends Legacy_AdminRenderSystem
             'dirname' => null,
             'file'    => null
         );
-        if(strpos($file,'..') !== false || strpos($prefix,'..' !== false))
+        // TODO @gigamaster Non-string needles will be interpreted as strings in the future. Use an explicit chr() call to preserve the current behavior
+        // if(strpos($file,'..') !== false || strpos($prefix,'..' != false))
+        if('..' && strpos($file,'..') !== false || ('..' && strpos($prefix,'..') != false))
         {
             return $ret;
         }

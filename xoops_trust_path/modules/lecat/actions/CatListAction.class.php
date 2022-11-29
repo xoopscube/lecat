@@ -19,9 +19,9 @@ class Lecat_CatListAction extends Lecat_AbstractListAction
 {
 	/**
 	 * &_getHandler
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	Lecat_CatHandler
 	**/
 	protected function &_getHandler()
@@ -32,9 +32,9 @@ class Lecat_CatListAction extends Lecat_AbstractListAction
 
 	/**
 	 * &_getFilterForm
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	Lecat_CatFilterForm
 	**/
 	protected function &_getFilterForm()
@@ -47,9 +47,9 @@ class Lecat_CatListAction extends Lecat_AbstractListAction
 
 	/**
 	 * _getBaseUrl
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	string
 	**/
 	protected function _getBaseUrl()
@@ -59,9 +59,9 @@ class Lecat_CatListAction extends Lecat_AbstractListAction
 
 	/**
 	 * getDefaultView
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	Enum
 	**/
 	public function getDefaultView()
@@ -69,16 +69,16 @@ class Lecat_CatListAction extends Lecat_AbstractListAction
         $pId = $this->mRoot->mContext->mRequest->getRequest('p_id');
 
 		$handler =& $this->_getHandler();
-		$this->mObjects =& $handler->getTree(intval($pId));
-	
+		$this->mObjects = $handler->getTree(intval($pId));
+
 		return LECAT_FRAME_VIEW_INDEX;
 	}
 
 	/**
 	 * executeViewIndex
-	 * 
+	 *
 	 * @param	XCube_RenderTarget	&$render
-	 * 
+	 *
 	 * @return	void
 	**/
 	public function executeViewIndex(/*** XCube_RenderTarget ***/ &$render)
@@ -87,9 +87,8 @@ class Lecat_CatListAction extends Lecat_AbstractListAction
 		$render->setAttribute('objects', $this->mObjects);
 		$render->setAttribute('dirname', $this->mAsset->mDirname);
 		//	$render->setAttribute('pageNavi', $this->mFilter->mNavi);
-        $breadcrumbs = $this->_getBreadcrumb($this->mObject);
+        // TODO fix mObject(s)
+        $breadcrumbs = $this->_getBreadcrumb($this->mObjects);
         $render->setAttribute('xoops_breadcrumbs', $breadcrumbs);
 	}
 }
-
-?>

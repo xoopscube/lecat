@@ -1,10 +1,31 @@
-<div id="lecat">
-<{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
-<h1><{$smarty.const._MD_LECAT_LANG_CAT}><{$smarty.const._LIST}></h1>
+<nav aria-label="breadcrumb">
+    <ul>
+        <li>
+            <a href="<{$xoops_url}>/">
+                <img class="svg home" src="<{$xoops_url}>/images/icons/home.svg" width="1em" height="1em" alt="home">
+            </a>
+        </li>
+        <li>
+            <a href="<{xoops_cooluri dirname=$dirname}>">
+                <img class="svg folder" src="<{$xoops_url}>/images/icons/folder.svg" width="1em" height="1em" alt="category"> <{$smarty.const._MD_LECAT_LANG_CAT}>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-<div class="catTree">
-  <h2><{$smarty.const._MD_LECAT_LANG_CAT}></h2>
-  <{legacy_tree tree=$objects dirname=$dirname}>
-</div>
-</div>
+<article id="lecat">
+
+    <header>
+    <h2><{$smarty.const._MD_LECAT_LANG_CAT}><{$smarty.const._LIST}></h2>
+        <p><{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}></p>
+    </header>
+
+    <div class="catTree">
+    <h3><{$smarty.const._MD_LECAT_LANG_CAT}></h3>
+    <{legacy_tree tree=$objects dirname=$dirname}>
+    </div>
+
+</article>

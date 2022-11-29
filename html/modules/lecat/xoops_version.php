@@ -10,7 +10,5 @@ if(!defined('XOOPS_ROOT_PATH'))
     exit;
 }
 
-$myDirName = basename(dirname(__FILE__));
+$myDirName = basename( __DIR__ );
 require XOOPS_TRUST_PATH . '/modules/lecat/xoops_version.php';
-
-?>

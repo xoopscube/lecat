@@ -42,5 +42,3 @@ class Lecat_Admin_IndexAction extends Lecat_AbstractAction
         $render->setAttribute('adminMenu', $this->mModule->getAdminMenu());
     }
 }
-
-?>

@@ -17,10 +17,10 @@ class Lecat_Utils
 {
 	/**
 	 * &getXoopsHandler
-	 * 
+	 *
 	 * @param	string	$name
 	 * @param	bool  $optional
-	 * 
+	 *
 	 * @return	XoopsObjectHandler
 	**/
 	public static function &getXoopsHandler(/*** string ***/ $name,/*** bool ***/ $optional = false)
@@ -31,9 +31,9 @@ class Lecat_Utils
 
 	/**
 	 * getEnv
-	 * 
+	 *
 	 * @param	string	$key
-	 * 
+	 *
 	 * @return	string
 	**/
 	public static function getEnv(/*** string ***/ $key)
@@ -73,24 +73,24 @@ class Lecat_Utils
 
 	/**
 	 * getActorList
-	 * 
+	 *
 	 * @param	string	$dirname
-	 * 
+	 *
 	 * @return	string[]
 	**/
 	public static function getActorList(/*** string ***/ $dirname)
 	{
 		$handler = xoops_gethandler('config');
 		$conf = $handler->getConfigsByDirname($dirname);
-	
+
 		return isset($conf['actors']) ? unserialize($conf['actors']) : array('key'=>array('viewer','poster','manager'),'title'=>array('Viewer', 'Poster', 'Manager'),'default'=>array(1,1,0));
 	}
 
     /**
      * getClientList
-     * 
+     *
      * @param   string  $dirname
-     * 
+     *
      * @return  array
     **/
 	public static function getClientList(/*** string ***/ $dirname)
@@ -104,5 +104,3 @@ class Lecat_Utils
 		return $list;
 	}
 }
-
-?>
