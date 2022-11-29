@@ -1,52 +1,74 @@
-<div id="lecat">
-<{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
-<h1><{$smarty.const._MD_LECAT_LANG_CAT_DELETE}></h1>
-
-<div class="confirm"><{$smarty.const._MD_LECAT_MESSAGE_CONFIRM_DELETE}></div>
+<nav aria-label="breadcrumb">
+    <ul>
+        <li>
+            <a href="<{$xoops_url}>/">
+                <img class="svg home" src="<{$xoops_url}>/images/icons/home.svg" width="1em" height="1em" alt="home">
+            </a>
+        </li>
+        <li>
+            <a href="<{xoops_cooluri dirname=$dirname}>">
+                <img class="svg folder" src="<{$xoops_url}>/images/icons/folder.svg" width="1em" height="1em" alt="category"> <{$smarty.const._MD_LECAT_LANG_CAT}>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 <form action="<{xoops_cooluri dirname=$dirname dataname=cat action=delete}>" method="post">
+
+<article id="lecat">
+
+    <header>
+        <h2><{$smarty.const._MD_LECAT_LANG_CAT_DELETE}></h2>
+        <{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}>
+    </header>
+
+<div class="alert confirm"><{$smarty.const._MD_LECAT_MESSAGE_CONFIRM_DELETE}></div>
+
+
   <table class="outer">
     <tbody>
       <tr>
         <th class="head"><{$smarty.const._MD_LECAT_LANG_CAT_ID}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('cat_id')}></td>
+        <td class="<{cycle values='odd,even'}>"><{$object->getShow('cat_id')}></td>
       </tr>
       <tr>
-        <th class="head"><{$smarty.const._MD_LECAT_LANG_TITLE}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('title')}></td>
+        <th><{$smarty.const._MD_LECAT_LANG_TITLE}></th>
+        <td><{$object->getShow('title')}></td>
       </tr>
       <tr>
-        <th class="head"><{$smarty.const._MD_LECAT_LANG_P_ID}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('p_id')}></td>
+        <th><{$smarty.const._MD_LECAT_LANG_P_ID}></th>
+        <td><{$object->getShow('p_id')}></td>
       </tr>
       <tr>
-        <th class="head"><{$smarty.const._MD_LECAT_LANG_MODULES}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('modules')}></td>
+        <th><{$smarty.const._MD_LECAT_LANG_MODULES}></th>
+        <td><{$object->getShow('modules')}></td>
       </tr>
       <tr>
-        <th class="head"><{$smarty.const._MD_LECAT_LANG_DESCRIPTION}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('description')}></td>
+        <th><{$smarty.const._MD_LECAT_LANG_DESCRIPTION}></th>
+        <td><{$object->getShow('description')}></td>
       </tr>
       <tr>
-        <th class="head"><{$smarty.const._MD_LECAT_LANG_WEIGHT}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('weight')}></td>
+        <th><{$smarty.const._MD_LECAT_LANG_WEIGHT}></th>
+        <td><{$object->getShow('weight')}></td>
       </tr>
       <tr>
-        <th class="head"><{$smarty.const._MD_LECAT_LANG_OPTIONS}></th>
-        <td class="<{cycle values="odd,even"}>"><{$object->getShow('options')}></td>
+        <th><{$smarty.const._MD_LECAT_LANG_OPTIONS}></th>
+        <td><{$object->getShow('options')}></td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <td class="foot" colspan="2">
-          <{xoops_token form=$actionForm}>
-          <{xoops_input type=hidden name=cat_id value=$actionForm->get('cat_id')}>
-          <input type="submit" class="formButton" value="<{$smarty.const._DELETE}>"/>
-          <input type="submit" class="formButton" value="<{$smarty.const._CANCEL}>" name="_form_control_cancel"/>
-        </td>
-      </tr>
-    </tfoot>
+
   </table>
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=cat_id value=$actionForm->get('cat_id')}>
+
+    <footer class="action-control">
+        <input type="submit" class="formButton" value="<{$smarty.const._DELETE}>">
+        <input type="submit" class="formButton" value="<{$smarty.const._CANCEL}>" name="_form_control_cancel">
+    </footer>
+
+</article>
+
 </form>
-</div>

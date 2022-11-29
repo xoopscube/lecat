@@ -50,7 +50,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 
 	/**
 	 * @public
-	 * 
+	 *
 	 */
 	public function getDepth()
 	{
@@ -115,9 +115,9 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 
     /**
      * _getPermit
-     * 
+     *
      * @param   int		$groupId
-     * 
+     *
      * @return  Lecat_PermitObject[]
     **/
 	protected function _getPermit($groupid=0)
@@ -142,12 +142,12 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 		static $permitArray = array();
 		static $flag = array();
 		$dirname = $this->getDirname();
-		
+
 		if(isset($permitArray[$dirname][$this->get('cat_id')][$groupId])){
 			$this->mTargetFlag = $flag[$dirname][$this->get('cat_id')][$groupId];
 			return $permitArray[$dirname][$this->get('cat_id')][$groupId];
 		}
-		
+
 		//if this category don't have permissions, check the upper category's permissions retroactively
 		if($permitArr = $this->_getPermit($groupId)){
 			$this->mTargetFlag = 'cur'; //current cat has permission
@@ -175,7 +175,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 					}
 				}
 			}
-		
+
 			$this->mTargetFlag = 'anc'; //ancestoral cat has permission
 		}
 		$permitArray[$dirname][$this->get('cat_id')][$groupId] = $permitArr;
@@ -185,11 +185,11 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 
 	/**
 	 * _getInheritPermission
-	 * 
+	 *
 	 * @param	string	$dirname
 	 * @param	int[]  $catPath
 	 * @param	int  $groupid
-	 * 
+	 *
 	 * @return	string
 	**/
 	protected function _getInheritPermission(/*** string ***/ $dirname, /*** int[] ***/$catPath, /*** int ***/ $groupId=0)
@@ -205,7 +205,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 			$objs = $handler->getObjects($criteria);
 			if(count($objs)>0) return $objs;
 		}
-	
+
 		//get default permission for each group
 		$criteria = new CriteriaCompo();
 		$criteria->add(new Criteria('cat_id', 0));
@@ -218,19 +218,19 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 
 	/**
 	 * getDefaultPermission
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	string[]
 	**/
 	public function getDefaultPermission()
 	{
 		$permissions = array();
 		$actors = Lecat_Utils::getActorList($this->getDirname());
-	
+
 		$cri = new CriteriaCompo();
 		$cri->add(new Criteria('cat_id', 0));
-	
+
 		$i=0;
 		foreach(array_keys($actors['title']) as $key){
 			$permissions[$key] = $actors['default'][$key];
@@ -251,7 +251,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 			$this->mProhibitedFlag = false;
 			return false;
 		}
-	
+
 		$groupHandler = Lecat_Utils::getXoopsHandler('group');
 		//check group permission
 		if(intval($uid)>0){
@@ -285,7 +285,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 	{
 		//check this category is for specific dirname ?
 		if(! $this->checkModule($module)) return false;
-	
+
 		$permitArr = $this->getThisPermit($groupid);
 		//check illegal permission settings
 		if(count($permitArr)>1){
@@ -301,7 +301,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 
 	/**
 	 * getClientData
-	 * 
+	 *
 	 * @param	array	$client
 	 *  $client['dirname']
 	 *  $client['dataname']
@@ -312,7 +312,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 	 *	string	$list['title'][]
 	 *	string	$list['template_name'][]
 	 *	mixed	$list['data'][]
-	 * 
+	 *
 	 * @return	mixed[]
 	 *	string	$list['dirname'][]
 	 *	string	$list['dataname'][]
@@ -329,9 +329,9 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 	/**
 	 * Has client date ?
 	 * Mainly this method is used when category is going to be deleted.
-	 * 
+	 *
 	 * @param	array	$client
-	 * 
+	 *
 	 * @return	mixed[]
 	**/
 	public function hasClientData()
@@ -357,11 +357,11 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 		if(! $module){
 			return true;
 		}
-	
+
 		$moduleArr = $this->getModuleArr();
 		if(count($moduleArr)>0) return true;
-	
-		return (in_array($module, $moduleArr)) ? true : false;
+	    //return (in_array($module, $moduleArr)) ? true : false;
+		return in_array($module, $moduleArr);
 	}
 
 	/**
@@ -374,7 +374,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 		if($this->get('modules')){
 			return explode(',', $this->get('modules'));
 		}
-	
+
 		$this->loadCatPath();
 		//search parent categories' modules confinement
 		foreach(array_keys($this->mCatPath['modules']) as $key){
@@ -382,7 +382,7 @@ class Lecat_CatObject extends Legacy_AbstractCategoryObject
 				return explode(',', $this->mCatPath['modules'][$key]);
 			}
 		}
-	
+
 		return array();
 	}
 
@@ -417,43 +417,46 @@ class Lecat_CatHandler extends Legacy_AbstractClientObjectHandler
 
 	/**
 	 * __construct
-	 * 
+	 *
 	 * @param	XoopsDatabase  &$db
 	 * @param	string	$dirname
-	 * 
+	 *
 	 * @return	void
 	**/
 	public function __construct(/*** XoopsDatabase ***/ &$db,/*** string ***/ $dirname)
 	{
-		$this->mTable = strtr($this->mTable,array('{dirname}' => $dirname));
-		parent::XoopsObjectGenericHandler($db);
+		 $this->mTable = strtr($this->mTable,array('{dirname}' => $dirname));
+;
+        // @gigamaster fix
+        // parent::XoopsObjectGenericHandler($db);
+        parent::__construct($db);
 	}
 
 	/**
 	 * delete
-	 * 
+	 *
 	 * @param	XoopsSimpleObject  &$obj
-	 * 
-	 * @return	
+	 *
+	 * @return
 	**/
 	public function delete(&$obj, $force=false)
 	{
 		$handler = Legacy_Utils::getModuleHandler('permit', $this->getDirname());
 		$handler->deleteAll(new Criteria('cat_id', $obj->get('cat_id')));
 		unset($handler);
-	
+
 		return parent::delete($obj, $force);
 	}
 
 
-	/**
-	 * getTree
-	 * get Lecat_CatObject array in parent-child tree form
-	 * @param	int 	$pid
-	 * @param	string	$module
-	 * 
-	 * @return	Lecat_CatObject[]
-	**/
+    /**
+     * getTree
+     * get Lecat_CatObject array in parent-child tree form
+     * @param int $p_id
+     * @param string $module
+     *
+     * @return    Lecat_CatObject[]
+     */
 	public function getTree(/*** int ***/ $p_id=0, /*** string ***/ $module="")
 	{
 		$tree = array();
@@ -462,11 +465,11 @@ class Lecat_CatHandler extends Legacy_AbstractClientObjectHandler
 
 	/**
 	 * _getTree
-	 * 
+	 *
 	 * @param	Lecat_CatObject[] 	$tree
 	 * @param	int 	$pid
 	 * @param	string	$module
-	 * 
+	 *
 	 * @return	Lecat_CatObject[]
 	**/
 	protected function _getTree(/*** Lecat_CatObject[] ***/ $tree, /*** int ***/ $p_id, /*** string ***/ $module)
@@ -487,12 +490,12 @@ class Lecat_CatHandler extends Legacy_AbstractClientObjectHandler
 
 	/**
 	 * filterCategory
-	 * 
+	 *
 	 * @param	Lecat_CatObject[]	$tree
 	 * @param	string	$action
 	 * @param	int 	$uid
 	 * @param	bool	$deleteFlag
-	 * 
+	 *
 	 * @return	Lecat_CatObject[]
 	**/
 	public function filterCategory($tree, $action, $uid=0, $deleteFlag=false)
@@ -518,5 +521,3 @@ class Lecat_CatHandler extends Legacy_AbstractClientObjectHandler
         return $conf[$this->_mClientConfig['image']] ? true : false;
     }
 }
-
-?>

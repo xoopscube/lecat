@@ -1,8 +1,32 @@
-<div id="lecat">
-<{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
-  <h1><{$smarty.const._MD_LECAT_LANG_DEFAULT_PERMISSIONS}></h1>
-  <form action="<{xoops_cooluri dirname=$dirname dataname=permit action=edit}>" method="post">
+<nav aria-label="breadcrumb">
+    <ul>
+        <li>
+            <a href="<{$xoops_url}>/">
+                <img class="svg home" src="<{$xoops_url}>/images/icons/home.svg" width="1em" height="1em" alt="home">
+            </a>
+        </li>
+        <li>
+            <a href="<{xoops_cooluri dirname=$dirname}>">
+                <img class="svg folder" src="<{$xoops_url}>/images/icons/folder.svg" width="1em" height="1em" alt="category"> <{$smarty.const._MD_LECAT_LANG_CAT}>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<form action="<{xoops_cooluri dirname=$dirname dataname=permit action=edit}>" method="post">
+    <article id="lecat">
+
+        <header>
+            <h2><{$smarty.const._MD_LECAT_LANG_DEFAULT_PERMISSIONS}></h2>
+            <p><{include file="db:`$dirname`_inc_menu.html" dirname=$dirname}></p>
+        </header>
+
+
+
+
     <{xoops_token form=$actionFormPermit}>
     <{xoops_input type=hidden name=permit_id value=$actionFormPermit->get('permit_id')}>
     <{xoops_input type=hidden name=cat_id value=$actionFormPermit->get('cat_id')}>
@@ -26,6 +50,9 @@
         </tr>
       <{/foreach}>
     </table>
-    <input type="submit" class="formButton" value="<{$smarty.const._SUBMIT}>"/>
+        <footer>
+            <input type="submit" class="primary" value="<{$smarty.const._SUBMIT}>">
+        </footer>
+    </article>
   </form>
-</div>
+

@@ -19,9 +19,9 @@ class Lecat_PermitObject extends XoopsSimpleObject
 
 	/**
 	 * __construct
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	void
 	**/
 	public function __construct()
@@ -34,9 +34,9 @@ class Lecat_PermitObject extends XoopsSimpleObject
 
 	/**
 	 * loadCat
-	 * 
+	 *
 	 * @param	void
-	 * 
+	 *
 	 * @return	void
 	**/
 	public function loadCat()
@@ -86,16 +86,19 @@ class Lecat_PermitHandler extends XoopsObjectGenericHandler
 
 	/**
 	 * __construct
-	 * 
+	 *
 	 * @param	XoopsDatabase  &$db
 	 * @param	string	$dirname
-	 * 
+	 *
 	 * @return	void
 	**/
 	public function __construct(/*** XoopsDatabase ***/ &$db,/*** string ***/ $dirname)
 	{
 		$this->mTable = strtr($this->mTable,array('{dirname}' => $dirname));
-		parent::XoopsObjectGenericHandler($db);
+        // @gigamaster fix
+        // parent::XoopsObjectGenericHandler($db);
+        parent::__construct($db);
+
 	}
 
 	public function updatePermission($catId, $groupId, $permission)
@@ -104,7 +107,7 @@ class Lecat_PermitHandler extends XoopsObjectGenericHandler
 		foreach(array_keys($permission[$groupId]) as $key){	//$key:action
 			$permitArr[$key] = $permission[$groupId][$key];
 		}
-	
+
 		$cri = new CriteriaCompo();
 		$cri->add(new Criteria('cat_id', intval($catId)));
 		$cri->add(new Criteria('groupid', intval($groupId)));
@@ -132,5 +135,3 @@ class Lecat_PermitHandler extends XoopsObjectGenericHandler
 		return ($this->insert($obj, true)) ? true : false;
 	}
 }
-
-?>

@@ -17,23 +17,25 @@ if(!defined('LECAT_TRUST_PATH'))
 
 require_once LECAT_TRUST_PATH . '/class/LecatUtils.class.php';
 
-//
-// Define a basic manifesto.
-//
-$modversion['name'] = $myDirName;
-$modversion['version'] = 2.05;
-$modversion['description'] = _MI_LECAT_DESC_LECAT;
-$modversion['author'] = _MI_LECAT_LANG_AUTHOR;
-$modversion['credits'] = _MI_LECAT_LANG_CREDITS;
-$modversion['help'] = 'help.html';
-$modversion['license'] = 'GPL';
-$modversion['official'] = 0;
-$modversion['image'] = 'images/module_icon.png';
-$modversion['dirname'] = $myDirName;
-$modversion['trust_dirname'] = 'lecat';
-$modversion['role'] = 'cat';
+// Manifesto
+$modversion['dirname']          = $myDirName;
+$modversion['trust_dirname']    = 'lecat';
+$modversion['name']             = $myDirName;
+$modversion['version']          = '2.31';
+$modversion['detailed_version'] = '2.31.1';
+$modversion['description']      = _MI_LECAT_DESC_LECAT;
+$modversion['author']           = _MI_LECAT_LANG_AUTHOR;
+$modversion['credits']          = _MI_LECAT_LANG_CREDITS;
+$modversion['license']          = 'GPL';
+$modversion['image']            = 'images/module_lecat.svg';
+$modversion['icon']             = 'images/lecat_icon.svg';
+$modversion['help']             = 'help.html';
+$modversion['official']         = 0;
+$modversion['cube_style']       = true;
+$modversion['read_any']         = true;
+$modversion['role']             = 'cat';
 
-$modversion['cube_style'] = true;
+// SQL install
 $modversion['legacy_installer'] = array(
 	'installer'   => array(
 		'class' 	=> 'Installer',
@@ -180,5 +182,3 @@ $modversion['blocks'] = array(
 		'visible_any'		=> true
 	),
 );
-
-?>

@@ -22,9 +22,9 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
 
     /**
      * &_getHandler
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  Lecat_CatHandler
     **/
     protected function &_getHandler()
@@ -35,9 +35,9 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
 
     /**
      * preprare
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  bool
     **/
 	public function prepare()
@@ -45,7 +45,7 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
 		parent::prepare();
 		$this->mObject->loadPcat();
         $this->mObject->loadCatPath();
-	
+
 		//for Permissions
 		$this->mPermit->set('cat_id', $this->mObject->get('cat_id'));
 		$this->_setupActionForm();
@@ -53,9 +53,9 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
 
     /**
      * _setupActionForm
-     * 
+     *
      * @param   void
-     * 
+     *
      * @return  void
     **/
 	protected function _setupActionForm()
@@ -80,25 +80,27 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
      **/
     public function getPagetitle()
     {
-        return $this->mObject->getShow('title');
+        //return $this->mObject->getShow('title');
+        // TODO fix @gigamaster
+        return Legacy_Utils::formatPagetitle($this->mRoot->mContext->mModule->mXoopsModule->get('name'), $this->_getPagetitle(), $this->_getActionTitle());
     }
 
     /**
      * executeViewSuccess
-     * 
+     *
      * @param   XCube_RenderTarget  &$render
-     * 
+     *
      * @return  void
     **/
     public function executeViewSuccess(/*** XCube_RenderTarget ***/ &$render)
     {
         $render->setTemplateName($this->mAsset->mDirname . '_cat_view.html');
-	
+
 		//format Permissions for html form
 		$permissions = new Lecat_Permission($this->mAsset->mDirname, $this->mObject);
 		$gPermit = ($this->mObject->getThisPermit()) ? $this->mObject->getThisPermit() : array();
 		$permissions->setPermissions($gPermit);
-	
+
 		//set renders
 		$render->setAttribute('dirname', $this->mAsset->mDirname);
 		$render->setAttribute('object', $this->mObject);
@@ -106,11 +108,11 @@ class Lecat_CatViewAction extends Lecat_AbstractViewAction
 		$render->setAttribute('permitObj', $permissions);
 		//modules confinement
 		$render->setAttribute('modulesArr', $this->mObject->getModuleArr());
-	
+
 		//for permit addition
 		$this->mActionForm->load($this->mPermit);
 		$render->setAttribute('actionFormPermit', $this->mActionForm);
-	
+
 		$list = array();
 		$clientList = Lecat_Utils::getClientList($this->mAsset->mDirname);
 		$render->setAttribute('clientList', $clientList);
